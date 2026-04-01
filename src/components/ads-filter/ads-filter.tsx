@@ -1,0 +1,16 @@
+import { Separator } from '@/components/ui/separator';
+
+import AdsCategoryFilter from './ads-category-filter';
+import NeedRevisionSwitch from './need-revision-switch';
+
+type Props = {};
+export default function AdsFilter({}: Props) {
+    return (
+        <div className="bg-card flex w-[256px] flex-col gap-2.5 rounded-lg p-4">
+            <h5 className="text-base font-medium">Фильтры</h5>
+            <AdsCategoryFilter />
+            <Separator />
+            <NeedRevisionSwitch />
+        </div>
+    );
+}

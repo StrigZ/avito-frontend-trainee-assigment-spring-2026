@@ -13,9 +13,8 @@ function App() {
                     <Route path="ads" element={<AdsPage />} />
                     <Route path="ads/:id" element={<ItemPage />} />
                     <Route path="ads/:id/edit" element={<EditPage />} />
-
-                    <Route path="*" element={<Navigate to="/ads" replace />} />
                 </Route>
+                <Route path="*" element={<Navigate to="/ads" replace />} />
             </Routes>
         </BrowserRouter>
     );
