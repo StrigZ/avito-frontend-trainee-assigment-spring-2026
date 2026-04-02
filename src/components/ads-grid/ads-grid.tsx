@@ -2,6 +2,7 @@ import { useAdsQueryContext } from '@/context/ads-query-provider';
 
 import LoadingSpinner from '../ui/loading-spinner';
 import AdsGridItem from './ads-grid-item';
+import Pagination from './pagination';
 
 export default function AdsGrid() {
     const { ads, isLoading } = useAdsQueryContext();
@@ -11,11 +12,14 @@ export default function AdsGrid() {
     }
 
     return ads.length > 0 ? (
-        <ul className="grid flex-1 grid-cols-[repeat(auto-fill,minmax(200px,1fr))] gap-x-[13.75px] gap-y-3">
-            {ads.map((item) => (
-                <AdsGridItem key={item.id} {...item} />
-            ))}
-        </ul>
+        <div className="flex w-full flex-1 flex-col gap-2.5 overflow-y-auto">
+            <ul className="grid grid-cols-[repeat(auto-fill,minmax(200px,1fr))] gap-x-[13.75px] gap-y-3">
+                {ads.map((item) => (
+                    <AdsGridItem key={item.id} {...item} />
+                ))}
+            </ul>
+            <Pagination />
+        </div>
     ) : (
         <div className="flex h-full w-full items-center justify-center text-center">
             По вашему запросу ничего не найдено.

@@ -8,7 +8,11 @@ export default function ResetFiltersButton() {
         <Button
             className="bg-card text-muted-foreground h-auto p-3 font-normal"
             onClick={() =>
-                updateQueryParam({ categories: [], needsRevision: false })
+                updateQueryParam({
+                    categories: [],
+                    needsRevision: false,
+                    skip: 0,
+                })
             }
         >
             Сбросить фильтры

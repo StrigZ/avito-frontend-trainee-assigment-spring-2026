@@ -21,6 +21,7 @@ const defaultQueryParams: QueryParamsObject = {
 
 type AdsQueryContext = {
     ads: Item[];
+    total: number;
     queryParams: QueryParamsObject;
     isLoading: boolean;
     updateQueryParam: (params: Partial<QueryParamsObject>) => void;
@@ -28,6 +29,7 @@ type AdsQueryContext = {
 
 const AdsQueryContext = createContext<AdsQueryContext>({
     ads: [],
+    total: 0,
     queryParams: defaultQueryParams,
     isLoading: false,
     updateQueryParam: () => {},
@@ -51,11 +53,12 @@ export default function AdsQueryProvider({ children }: Props) {
     const value: AdsQueryContext = useMemo(
         () => ({
             ads: data?.items ?? [],
+            total: data?.total ?? 0,
             isLoading,
             queryParams,
             updateQueryParam,
         }),
-        [data?.items, isLoading, queryParams, updateQueryParam],
+        [data?.items, data?.total, isLoading, queryParams, updateQueryParam],
     );
     return (
         <AdsQueryContext.Provider value={value}>

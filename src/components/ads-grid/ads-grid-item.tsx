@@ -24,7 +24,9 @@ export default function AdsGridItem({
                     <p className="border-muted text-foreground/85 absolute top-0 left-3 -translate-y-1/2 rounded-md border bg-white px-3 text-sm">
                         {categoryToDisplayTextMap[category]}
                     </p>
-                    <h5 className="text-foreground/85 text-base">{title}</h5>
+                    <h5 className="text-foreground/85 truncate text-base">
+                        {title}
+                    </h5>
                     <p className="text-foreground/45 mt-auto text-base leading-[1.4] font-semibold tracking-normal">
                         {price} ₽
                     </p>
