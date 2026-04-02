@@ -9,6 +9,7 @@ const categoryToDisplayTextMap: Record<string, string> = {
 };
 
 export default function AdsGridItem({
+    id,
     title,
     price,
     category,
@@ -16,7 +17,7 @@ export default function AdsGridItem({
 }: Item) {
     return (
         <li className="bg-card w-full cursor-pointer overflow-hidden rounded-2xl shadow-sm">
-            <Link to={'id'} className="flex h-full flex-col">
+            <Link to={String(id)} className="flex h-full flex-col">
                 <div className="bg-muted flex aspect-4/3 items-center justify-center">
                     <Image size={72} />
                 </div>

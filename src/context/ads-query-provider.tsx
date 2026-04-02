@@ -1,5 +1,5 @@
 import { useAds } from '@/hooks/useAds';
-import type { Item, QueryParam, QueryParamsObject } from '@/types';
+import type { Item, QueryParamsObject } from '@/types';
 import {
     type ReactNode,
     createContext,
