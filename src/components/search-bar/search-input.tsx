@@ -5,7 +5,7 @@ import { Input } from '../ui/input';
 
 export default function SearchInput() {
     const { queryParams, updateQueryParam } = useAdsQueryContext();
-    const handleSearchChange = (q: string) => updateQueryParam({ q });
+    const handleSearchChange = (q: string) => updateQueryParam({ skip: 0, q });
 
     return (
         <div className="relative flex-1">

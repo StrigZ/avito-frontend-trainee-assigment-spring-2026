@@ -53,8 +53,7 @@ function convertParamsToString(
     return `${column}:${direction}`;
 }
 
-type Props = { className?: string };
-export default function SortDropdown({ className }: Props) {
+export default function SortDropdown() {
     const { queryParams, updateQueryParam } = useAdsQueryContext();
 
     const handleSortChange = (newSortStr: string) => {
@@ -62,7 +61,7 @@ export default function SortDropdown({ className }: Props) {
         const sortColumn = params.column as SortColumnQueryParam;
         const sortDirection = params.direction as SortDirectionQueryParam;
 
-        updateQueryParam({ sortColumn, sortDirection });
+        updateQueryParam({ skip: 0, sortColumn, sortDirection });
     };
 
     return (
