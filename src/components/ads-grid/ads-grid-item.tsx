@@ -1,23 +1,39 @@
+import type { Item } from '@/types';
 import { Image } from 'lucide-react';
 import { Link } from 'react-router';
 
-type Props = {};
-export default function AdsGridItem({}: Props) {
+const categoryToDisplayTextMap: Record<string, string> = {
+    auto: 'Авто',
+    real_estate: 'Недвижимость',
+    electronics: 'Электроника',
+};
+
+export default function AdsGridItem({
+    title,
+    price,
+    category,
+    description,
+}: Item) {
     return (
-        <li className="bg-card cursor-pointer overflow-hidden rounded-2xl shadow-sm">
-            <Link to={'id'}>
+        <li className="bg-card w-full cursor-pointer overflow-hidden rounded-2xl shadow-sm">
+            <Link to={'id'} className="flex h-full flex-col">
                 <div className="bg-muted flex aspect-4/3 items-center justify-center">
                     <Image size={72} />
                 </div>
-                <div className="relative space-y-1 px-4 pt-5.5">
-                    <p className="border-muted text-foreground absolute top-0 left-4 -translate-y-1/2 rounded-md border bg-white px-3 text-sm">
-                        Электроника
+                <div className="relative flex h-full flex-col gap-1 p-4 pt-5.5">
+                    <p className="border-muted text-foreground/85 absolute top-0 left-3 -translate-y-1/2 rounded-md border bg-white px-3 text-sm">
+                        {categoryToDisplayTextMap[category]}
                     </p>
-                    <p className="text-foreground">Наушники</p>
-                    <p className="text-foreground/45 leading-[1.4] font-semibold">
-                        2990 ₽
+                    <h5 className="text-foreground/85 text-base">{title}</h5>
+                    <p className="text-foreground/45 mt-auto text-base leading-[1.4] font-semibold tracking-normal">
+                        {price} ₽
                     </p>
-                    <p>Требует доработок</p>
+                    {!description && (
+                        <div className="bg-secondary text-secondary-foreground flex w-fit items-center gap-2 rounded-lg px-2 py-0.5 text-sm">
+                            <div className="bg-secondary-foreground h-1.5 w-1.5 rounded-full" />
+                            Требует доработок
+                        </div>
+                    )}
                 </div>
             </Link>
         </li>

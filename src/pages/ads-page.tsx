@@ -19,7 +19,7 @@ export default function AdsPage({}: Props) {
                 <SearchBar />
             </header>
             <div className="flex h-full w-full flex-col items-start gap-6 md:flex-row">
-                <aside className="flex w-full flex-1 flex-col gap-2.5">
+                <aside className="flex w-full flex-col gap-2.5 md:w-[256px]">
                     <AdsFilter />
                     <ResetFiltersButton />
                 </aside>
