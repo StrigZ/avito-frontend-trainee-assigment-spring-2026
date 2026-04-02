@@ -1,82 +1,93 @@
 import {
     Select,
     SelectContent,
-    SelectGroup,
     SelectItem,
     SelectTrigger,
     SelectValue,
 } from '@/components/ui/select';
-import { useState } from 'react';
+import { sortColumns, sortDirections } from '@/constants';
+import { useAdsQueryContext } from '@/context/ads-query-provider';
+import type { SortColumnQueryParam, SortDirectionQueryParam } from '@/types';
 
-type SortingRule = {
-    ruleDisplayText: 'названию' | 'новизне' | 'цене';
-    order: {
-        orderDisplayText: string;
-        value?: string;
-    }[];
+const columnToTextMap: Record<SortColumnQueryParam, string> = {
+    createdAt: 'новизне',
+    title: 'названию',
+    price: 'цене',
 };
 
-const sortingRules: SortingRule[] = [
-    {
-        ruleDisplayText: 'новизне',
-        order: [
-            {
-                orderDisplayText: 'сначала новые',
-                value: 'date:asc',
-            },
-            {
-                orderDisplayText: 'сначала старые',
-                value: 'date:desc',
-            },
-        ],
+const directionToTextMap: Record<
+    SortColumnQueryParam,
+    Record<SortDirectionQueryParam, string>
+> = {
+    createdAt: {
+        asc: 'сначала новые',
+        desc: 'сначала старые',
     },
-    {
-        ruleDisplayText: 'названию',
-        order: [
-            {
-                orderDisplayText: 'А → Я',
-                value: 'name:asc',
-            },
-            {
-                orderDisplayText: 'Я → А',
-                value: 'name:desc',
-            },
-        ],
+    title: {
+        asc: 'А → Я',
+        desc: 'Я → А',
     },
-    {
-        ruleDisplayText: 'цене',
-        order: [
-            {
-                orderDisplayText: 'сначала дешевле',
-                value: 'price:asc',
-            },
-            {
-                orderDisplayText: 'сначала дороже',
-                value: 'price:desc',
-            },
-        ],
+    price: {
+        asc: 'сначала дешевле',
+        desc: 'сначала дороже',
     },
-];
+};
+
+function getDisplayText(
+    column: SortColumnQueryParam,
+    direction: SortDirectionQueryParam,
+) {
+    return `По ${columnToTextMap[column]} (${directionToTextMap[column][direction]})`;
+}
+
+function convertStringToParams(str: string) {
+    const [column, direction] = str.split(':');
+
+    return { column, direction };
+}
+
+function convertParamsToString(
+    column: SortColumnQueryParam,
+    direction: SortDirectionQueryParam,
+) {
+    return `${column}:${direction}`;
+}
 
 type Props = { className?: string };
 export default function SortDropdown({ className }: Props) {
-    const [sortingRule, setSortingRule] = useState(
-        sortingRules[0].order[0].value,
-    );
+    const { queryParams, updateQueryParam } = useAdsQueryContext();
+
+    const handleSortChange = (newSortStr: string) => {
+        const params = convertStringToParams(newSortStr);
+        const sortColumn = params.column as SortColumnQueryParam;
+        const sortDirection = params.direction as SortDirectionQueryParam;
+
+        updateQueryParam({ sortColumn, sortDirection });
+    };
 
     return (
         <Select
-            value={sortingRule}
-            onValueChange={(value) => setSortingRule(value)}
+            value={convertParamsToString(
+                queryParams.sortColumn,
+                queryParams.sortDirection,
+            )}
+            onValueChange={handleSortChange}
         >
             <SelectTrigger className="bg-card border-input w-60 border-4">
-                <SelectValue placeholder={sortingRule} />
+                <SelectValue
+                    placeholder={getDisplayText(
+                        queryParams.sortColumn,
+                        queryParams.sortDirection,
+                    )}
+                />
             </SelectTrigger>
             <SelectContent align="center" position="popper">
-                {sortingRules.map(({ ruleDisplayText, order }) =>
-                    order.map(({ orderDisplayText, value }) => (
-                        <SelectItem value={value!}>
-                            {`по ${ruleDisplayText} (${orderDisplayText})`}
+                {sortColumns.map((column) =>
+                    sortDirections.map((direction) => (
+                        <SelectItem
+                            value={convertParamsToString(column, direction)}
+                        >
+                            {getDisplayText(column, direction)}
                         </SelectItem>
                     )),
                 )}

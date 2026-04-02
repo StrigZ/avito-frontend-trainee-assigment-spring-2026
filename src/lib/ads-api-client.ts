@@ -1,10 +1,16 @@
-import type { Item } from '@/types';
+import type { Item, QueryParamsObject } from '@/types';
+
+import { getQueryParamsString } from './utils';
 
 const API_URL = 'http://localhost:8080';
 
 class AdsApiClient {
-    public async getItems(): Promise<{ items: Item[]; total: number }> {
-        return (await fetch(`${API_URL}/items`)).json();
+    public async getItems(
+        params?: QueryParamsObject,
+    ): Promise<{ items: Item[]; total: number }> {
+        const queryParams = params ? getQueryParamsString(params) : '';
+
+        return (await fetch(`${API_URL}/items${queryParams}`)).json();
     }
     public async getItem(id: string): Promise<Item> {
         return (await fetch(`${API_URL}/items/${id}`)).json();

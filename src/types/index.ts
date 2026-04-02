@@ -1,3 +1,5 @@
+import type { categories, sortColumns, sortDirections } from '@/constants';
+
 export type Item = {
     id: number;
     title: string;
@@ -52,3 +54,19 @@ export type UpdateAdInput = {
     id: string;
     data: Item;
 };
+
+export type SortColumnQueryParam = (typeof sortColumns)[number];
+export type SortDirectionQueryParam = (typeof sortDirections)[number];
+export type Category = (typeof categories)[number];
+
+export type QueryParamsObject = {
+    q: string;
+    limit: number;
+    skip: number;
+    needsRevision: boolean;
+    categories: Category[];
+    sortColumn: SortColumnQueryParam;
+    sortDirection: SortDirectionQueryParam;
+};
+
+export type QueryParam = keyof QueryParamsObject;

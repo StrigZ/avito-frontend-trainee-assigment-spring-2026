@@ -1,3 +1,4 @@
+import type { QueryParamsObject } from '@/types';
 import { queryOptions } from '@tanstack/react-query';
 
 import { adsApiClient } from './ads-api-client';
@@ -10,8 +11,12 @@ export const adOptions = ({ id }: { id: string }) =>
         enabled: !!id,
     });
 
-export const adsOptions = () =>
+export const adsOptions = ({
+    queryParams,
+}: {
+    queryParams?: QueryParamsObject;
+}) =>
     queryOptions({
-        queryKey: adKeys.lists(),
-        queryFn: () => adsApiClient.getItems(),
+        queryKey: adKeys.list(queryParams),
+        queryFn: () => adsApiClient.getItems(queryParams),
     });
