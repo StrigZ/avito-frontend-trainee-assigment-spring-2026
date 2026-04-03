@@ -2,8 +2,9 @@ import type { Item } from '@/types';
 import { format } from 'date-fns';
 import { ru } from 'date-fns/locale';
 import { Edit } from 'lucide-react';
+import { Link } from 'react-router';
 
-import { Button } from '../ui/button';
+import { buttonVariants } from '../ui/button';
 
 export default function ItemPageHeader({
     title,
@@ -17,9 +18,15 @@ export default function ItemPageHeader({
                 {title} <span>{price} ₽</span>
             </h2>
             <div className="flex items-start justify-between">
-                <Button className="bg-button-active flex items-center gap-2 rounded-lg px-3 py-2 text-base font-normal">
+                <Link
+                    to={'edit'}
+                    className={buttonVariants({
+                        className:
+                            'bg-button-active! flex items-center gap-2 rounded-lg px-3 py-2 text-base font-normal',
+                    })}
+                >
                     Редактировать <Edit />
-                </Button>
+                </Link>
                 <div className="text-muted-foreground flex flex-col gap-1 text-right text-base leading-none font-normal">
                     <p>
                         Опубликовано:{' '}
