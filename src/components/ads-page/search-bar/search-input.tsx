@@ -1,7 +1,6 @@
+import { Input } from '@/components/ui/input';
 import { useAdsQueryContext } from '@/context/ads-query-provider';
 import { Search } from 'lucide-react';
-
-import { Input } from '../ui/input';
 
 export default function SearchInput() {
     const { queryParams, updateQueryParam } = useAdsQueryContext();

@@ -1,7 +1,6 @@
+import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import { LayoutGrid, List } from 'lucide-react';
-
-import { Button } from '../ui/button';
 
 type Props = {
     layout: 'grid' | 'list';

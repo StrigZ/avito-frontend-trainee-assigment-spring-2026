@@ -1,6 +1,6 @@
+import LoadingSpinner from '@/components/ui/loading-spinner';
 import { useAdsQueryContext } from '@/context/ads-query-provider';
 
-import LoadingSpinner from '../ui/loading-spinner';
 import AdsGridItem from './ads-grid-item';
 import Pagination from './pagination';
 

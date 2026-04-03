@@ -1,7 +1,7 @@
-import AdsFilter from '@/components/ads-filter/ads-filter';
-import ResetFiltersButton from '@/components/ads-filter/reset-filters-button';
-import AdsGrid from '@/components/ads-grid/ads-grid';
-import SearchBar from '@/components/search-bar/search-bar';
+import AdsFilter from '@/components/ads-page/ads-filter/ads-filter';
+import ResetFiltersButton from '@/components/ads-page/ads-filter/reset-filters-button';
+import AdsGrid from '@/components/ads-page/ads-grid/ads-grid';
+import SearchBar from '@/components/ads-page/search-bar/search-bar';
 import { useAdsQueryContext } from '@/context/ads-query-provider';
 
 export default function AdsPage() {

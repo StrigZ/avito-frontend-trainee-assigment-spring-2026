@@ -1,8 +1,7 @@
+import { Button } from '@/components/ui/button';
 import { useAdsQueryContext } from '@/context/ads-query-provider';
 import { cn } from '@/lib/utils';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
-
-import { Button } from '../ui/button';
 
 export default function Pagination() {
     const { queryParams, updateQueryParam, total } = useAdsQueryContext();
