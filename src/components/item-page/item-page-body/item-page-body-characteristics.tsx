@@ -1,37 +1,5 @@
-import { paramToTextMap } from '@/constants';
+import { paramToTextMap, paramValueToTextMap } from '@/constants';
 import type { Category, ItemParam } from '@/types';
-
-type ParamValueToTextMap = {
-    [C in Category]: {
-        [P in ItemParam]?: Record<string, string>;
-    };
-};
-const paramValueToTextMap: ParamValueToTextMap = {
-    auto: {
-        transmission: {
-            automatic: 'Автоматика',
-            manual: 'Ручное',
-        },
-    },
-    real_estate: {
-        type: {
-            flat: 'Квартира',
-            house: 'Дом',
-            room: 'Комната',
-        },
-    },
-    electronics: {
-        type: {
-            phone: 'Телефон',
-            laptop: 'Ноутбук',
-            misc: 'Другое',
-        },
-        condition: {
-            new: 'Новое',
-            used: 'Б\\У',
-        },
-    },
-};
 
 type Props = {
     assignedParams: [ItemParam, string | number][];

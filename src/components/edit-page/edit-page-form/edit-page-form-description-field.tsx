@@ -1,4 +1,5 @@
 import { Field, FieldContent, FieldLabel } from '@/components/ui/field';
+import { Textarea } from '@/components/ui/textarea';
 import { Controller, useFormContext } from 'react-hook-form';
 
 export default function EditPageFormDescriptionField() {
@@ -11,7 +12,7 @@ export default function EditPageFormDescriptionField() {
                 <Controller
                     control={form.control}
                     name="description"
-                    render={({ field }) => <textarea {...field} />}
+                    render={({ field }) => <Textarea {...field} />}
                 />
             </FieldContent>
         </Field>
