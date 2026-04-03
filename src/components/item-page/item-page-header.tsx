@@ -25,10 +25,12 @@ export default function ItemPageHeader({
                         Опубликовано:{' '}
                         {format(createdAt, 'd MMMM HH:mm', { locale: ru })}
                     </p>
-                    <p>
-                        Отредактировано:{' '}
-                        {format(updatedAt, 'd MMMM HH:mm', { locale: ru })}
-                    </p>
+                    {updatedAt && (
+                        <p>
+                            Отредактировано:{' '}
+                            {format(updatedAt, 'd MMMM HH:mm', { locale: ru })}
+                        </p>
+                    )}
                 </div>
             </div>
         </header>
