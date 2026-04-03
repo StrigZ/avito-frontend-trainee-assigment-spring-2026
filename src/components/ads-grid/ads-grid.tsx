@@ -8,11 +8,11 @@ export default function AdsGrid() {
     const { ads, isLoading } = useAdsQueryContext();
 
     if (isLoading || !ads) {
-        return <LoadingSpinner classNames="h-full flex-1" />;
+        return <LoadingSpinner className="" />;
     }
 
     return ads.length > 0 ? (
-        <div className="flex w-full flex-1 flex-col gap-2.5 overflow-y-auto">
+        <div className="flex flex-col gap-2.5 overflow-y-auto">
             <ul className="grid grid-cols-[repeat(auto-fill,minmax(200px,1fr))] gap-x-[13.75px] gap-y-3">
                 {ads.map((item) => (
                     <AdsGridItem key={item.id} {...item} />

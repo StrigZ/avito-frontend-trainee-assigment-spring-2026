@@ -26,25 +26,34 @@ type AutoItemParams = {
     brand?: string;
     model?: string;
     yearOfManufacture?: number;
-    transmission?: 'automatic' | 'manual';
+    transmission?: AutoItemTransmission;
     mileage?: number;
     enginePower?: number;
 };
 
+export type AutoItemTransmission = 'automatic' | 'manual';
+export type AutoItemParam = keyof AutoItemParams;
+
 type RealEstateItemParams = {
-    type?: 'flat' | 'house' | 'room';
+    type?: RealEstateItemType;
     address?: string;
     area?: number;
     floor?: number;
 };
 
+export type RealEstateItemType = 'flat' | 'house' | 'room';
+export type RealEstateItemParam = keyof RealEstateItemParams;
+
 type ElectronicsItemParams = {
-    type?: 'phone' | 'laptop' | 'misc';
+    type?: ElectronicsItemType;
     brand?: string;
     model?: string;
-    condition?: 'new' | 'used';
+    condition?: ElectronicsItemCondition;
     color?: string;
 };
+export type ElectronicsItemType = 'phone' | 'laptop' | 'misc';
+export type ElectronicsItemCondition = 'new' | 'used';
+export type ElectronicsItemParam = keyof ElectronicsItemParams;
 
 export type ItemSortColumn = Extract<keyof Item, 'title' | 'createdAt'>;
 
