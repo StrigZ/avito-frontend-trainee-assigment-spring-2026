@@ -14,7 +14,7 @@ export default function ItemPageHeader({
 }: Item) {
     return (
         <header className="flex flex-col gap-3">
-            <h2 className="text-foreground/85 flex items-center justify-between text-3xl font-medium">
+            <h2 className="text-foreground/85 flex items-center justify-between text-xl font-medium md:text-3xl">
                 {title} <span>{price} ₽</span>
             </h2>
             <div className="flex items-start justify-between">

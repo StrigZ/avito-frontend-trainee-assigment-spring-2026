@@ -35,7 +35,12 @@ export default function EditPageFormBaseFields() {
                         <FieldLabel htmlFor={`edit-form-${fieldName}`}>
                             <span className="text-red-500">*</span> {fieldText}
                         </FieldLabel>
-                        <FieldContent className="space-y-2">
+                        <FieldContent
+                            className={cn({
+                                'grid grid-rows-[min-content_min-content] gap-x-6 gap-y-2 md:grid-cols-2':
+                                    field.name === 'price',
+                            })}
+                        >
                             <div className="relative">
                                 <Input
                                     {...field}
@@ -65,7 +70,10 @@ export default function EditPageFormBaseFields() {
                                 />
                             </div>
                             {fieldState.invalid && (
-                                <FieldError errors={[fieldState.error]} />
+                                <FieldError
+                                    className="row-start-2"
+                                    errors={[fieldState.error]}
+                                />
                             )}
                             {field.name === 'price' && (
                                 <EditPageFormGenerateButton
