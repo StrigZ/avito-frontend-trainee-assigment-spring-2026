@@ -9,7 +9,7 @@ export default function EditPage() {
     const { data, isLoading } = useAd({ id });
 
     if (isLoading || !data) {
-        return <LoadingSpinner />;
+        return <LoadingSpinner className="h-screen" />;
     }
 
     return (
