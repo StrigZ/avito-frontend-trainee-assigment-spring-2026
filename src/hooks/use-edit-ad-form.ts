@@ -1,7 +1,7 @@
 import { categories, categoryToParamsMap } from '@/constants';
 import type { Category, Item, ItemParam } from '@/types';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
 import { type Resolver, useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router';
 import * as z from 'zod';
@@ -61,7 +61,7 @@ export default function useEditAdForm({
     const { params, ...itemFields } = item;
     const isSameCategory = category === item.category;
     const navigate = useNavigate();
-    const formSchema = buildFormSchema(category);
+    const formSchema = useMemo(() => buildFormSchema(category), [category]);
 
     type FormValues = Omit<z.infer<typeof formSchema>, 'price'> & {
         price: number;
