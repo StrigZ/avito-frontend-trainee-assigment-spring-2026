@@ -19,11 +19,12 @@ export function useAdMutations() {
                     queryKey: adKeys.detail(variables.id),
                 }),
             ]);
-            toast.success('Изменения сохранены');
+            toast.success('Изменения сохранены', { position: 'top-right' });
             navigate(`/ads/${variables.id}`);
         },
         onError: () =>
             toast.error('Ошибка сохранения', {
+                position: 'top-right',
                 description:
                     'При попытке сохранить изменения произошла ошибка. Попробуйте ещё раз или зайдите позже.',
             }),
