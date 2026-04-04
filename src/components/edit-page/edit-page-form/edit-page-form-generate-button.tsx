@@ -113,12 +113,12 @@ export default function EditPageFormGenerateButton({
                 </Button>
             </PopoverAnchor>
             <PopoverContent
-                className={cn('w-83', { 'bg-red-100': hasError })}
+                className={cn('w-83', { 'bg-danger': hasError })}
                 align="center"
             >
                 <p
                     className={cn('text-sm font-medium', {
-                        'text-red-400': hasError,
+                        'text-danger-foreground': hasError,
                     })}
                 >
                     {hasError
@@ -141,7 +141,7 @@ export default function EditPageFormGenerateButton({
                         </Button>
                     )}
                     <Button
-                        className={cn({ 'bg-red-200': hasError })}
+                        className={cn({ 'bg-danger-button': hasError })}
                         type="button"
                         variant="outline"
                         onClick={handleClose}

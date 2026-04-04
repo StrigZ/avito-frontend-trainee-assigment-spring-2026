@@ -17,13 +17,13 @@ export default function AdsGridItem({
                     <Image size={72} />
                 </div>
                 <div className="relative flex h-full flex-col gap-1 p-4 pt-5.5">
-                    <p className="border-muted text-foreground/85 absolute top-0 left-3 -translate-y-1/2 rounded-md border bg-white px-3 text-sm">
+                    <p className="border-muted text-foreground absolute top-0 left-3 -translate-y-1/2 rounded-md border bg-white px-3 text-sm">
                         {categoryToDisplayTextMap[category]}
                     </p>
-                    <h5 className="text-foreground/85 truncate text-base">
+                    <h5 className="text-foreground truncate text-base">
                         {title}
                     </h5>
-                    <p className="text-foreground/45 mt-auto text-base leading-[1.4] font-semibold tracking-normal">
+                    <p className="text-subtle mt-auto text-base leading-[1.4] font-semibold tracking-normal">
                         {price} ₽
                     </p>
                     {needsRevision && (

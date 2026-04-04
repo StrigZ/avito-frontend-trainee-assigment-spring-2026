@@ -11,7 +11,7 @@ export default function ItemPageBodyMissingParams({ missingParams }: Props) {
 
             <div className="space-y-2">
                 <p className="font-semibold">Требуются доработки</p>
-                <div className="text-foreground/85 text-sm">
+                <div className="text-foreground text-sm">
                     <p>У объявления не заполнены поля:</p>
                     <ul className="list-disc pl-6">
                         {missingParams.map((param) => (

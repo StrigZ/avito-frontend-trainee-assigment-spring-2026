@@ -33,7 +33,8 @@ export default function EditPageFormBaseFields() {
                 render={({ field, fieldState }) => (
                     <Field data-invalid={fieldState.invalid}>
                         <FieldLabel htmlFor={`edit-form-${fieldName}`}>
-                            <span className="text-red-500">*</span> {fieldText}
+                            <span className="text-danger-foreground">*</span>{' '}
+                            {fieldText}
                         </FieldLabel>
                         <FieldContent
                             className={cn({
@@ -45,7 +46,7 @@ export default function EditPageFormBaseFields() {
                                 <Input
                                     {...field}
                                     className={cn({
-                                        'border-red-500':
+                                        'border-danger':
                                             fieldState.error &&
                                             fieldState.isDirty,
                                     })}

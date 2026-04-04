@@ -35,9 +35,9 @@ export default function EditPageFormDescriptionField() {
                             )}
                             <span
                                 className={cn(
-                                    'text-foreground/25 absolute right-0 bottom-0 translate-y-full text-sm',
+                                    'text-subtle absolute right-0 bottom-0 translate-y-full text-sm',
                                     {
-                                        'text-red-500':
+                                        'text-danger-foreground':
                                             field.value.length > 1000,
                                     },
                                 )}

@@ -6,7 +6,7 @@ export default function ResetFiltersButton() {
 
     return (
         <Button
-            className="bg-card text-muted-foreground h-auto p-3 font-normal"
+            className="bg-card text-subtle h-auto p-3 font-normal"
             onClick={() =>
                 updateQueryParam({
                     categories: [],

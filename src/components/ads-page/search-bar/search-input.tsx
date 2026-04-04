@@ -10,7 +10,7 @@ export default function SearchInput() {
         <div className="relative flex-1">
             <Input
                 placeholder="Найти объявление..."
-                className="bg-input rounded-lg border-none placeholder:text-sm"
+                className="bg-input placeholder:text-subtle rounded-lg border-none placeholder:text-sm"
                 value={queryParams.q}
                 onChange={(e) => handleSearchChange(e.target.value)}
             />

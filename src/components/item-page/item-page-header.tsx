@@ -17,7 +17,7 @@ export default function ItemPageHeader({
             <Link to={'/ads'} className="flex items-center gap-1">
                 <ArrowLeft /> Назад
             </Link>
-            <h2 className="text-foreground/85 flex items-center justify-between text-xl font-medium md:text-3xl">
+            <h2 className="text-foreground flex items-center justify-between text-xl font-medium md:text-3xl">
                 {title} <span>{price} ₽</span>
             </h2>
             <div className="flex items-start justify-between">

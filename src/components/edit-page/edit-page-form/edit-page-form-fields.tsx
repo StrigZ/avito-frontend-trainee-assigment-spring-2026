@@ -47,7 +47,7 @@ export default function EditPageFormFields({ item, category }: Props) {
                         )}
                     </Button>
                     <Button
-                        className="bg-muted text-foreground/85"
+                        className="bg-muted text-foreground"
                         type="button"
                         onClick={cancelEdit}
                         disabled={isLoading}

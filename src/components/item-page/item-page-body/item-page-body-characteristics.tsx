@@ -11,13 +11,13 @@ export default function ItemPageBodyCharacteristics({
 }: Props) {
     return (
         <div className="space-y-4">
-            <p className="text-foreground/85 text-[22px] font-medium">
+            <p className="text-foreground text-[22px] font-medium">
                 Характеристики
             </p>
             <ul>
                 {assignedParams.map(([param, value]) => (
                     <li className="grid grid-cols-2" key={param}>
-                        <p className="text-foreground/45 font-semibold">
+                        <p className="text-subtle font-semibold">
                             {paramToTextMap[param]}
                         </p>
                         <p className="font-normal">

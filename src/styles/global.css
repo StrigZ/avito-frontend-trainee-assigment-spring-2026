@@ -27,6 +27,8 @@
     --color-input: var(--input);
     --color-border: var(--border);
     --color-destructive: var(--destructive);
+    --color-destructive-foreground: var(--destructive-foreground);
+    --color-destructive-bg: var(--destructive-bg);
     --color-accent-foreground: var(--accent-foreground);
     --color-accent: var(--accent);
     --color-muted-foreground: var(--muted-foreground);
@@ -41,26 +43,68 @@
     --color-card: var(--card);
     --color-foreground: var(--foreground);
     --color-background: var(--background);
-    --color-button-active: #1890FF
 
+    /* Semantic action colors */
+    --color-button-active: var(--button-active);
+    --color-button-cancel: var(--button-cancel);
+
+    /* Warning */
+    --color-warning: var(--warning);
+    --color-warning-foreground: var(--warning-foreground);
+
+    /* Danger */
+    --color-danger: var(--danger);
+    --color-danger-foreground: var(--danger-foreground);
+    --color-danger-button: var(--danger-button);
+
+    /* Success */
+    --color-success: var(--success);
+    --color-success-foreground: var(--success-foreground);
+
+    /* Subtle text */
+    --color-subtle: var(--subtle);
 }
 
 :root {
     --background: #F7F5F8;
-    --foreground: #000000;
-    --card: oklch(1 0 0);
+    --foreground: #000000D9;
+    --card: #FFFFFF;
     --card-foreground: #000000D9;
-    --popover: oklch(1 0 0);
+    --popover: #FFFFFF;
     --popover-foreground: #000000D9;
     --primary: oklch(0.205 0 0);
     --primary-foreground: oklch(0.985 0 0);
-    --secondary:  #F9F1E6;
+
+    /* Warning — used for "needs revision" badge */
+    --secondary: #F9F1E6;
     --secondary-foreground: #FAAD14;
+    --warning: #F9F1E6;
+    --warning-foreground: #FAAD14;
+
     --muted: #F6F6F8;
     --muted-foreground: #848388;
     --accent: oklch(0.97 0 0);
     --accent-foreground: #848388;
-    --destructive: oklch(0.577 0.245 27.325);
+
+    /* Danger */
+    --destructive: #C00F0C;
+    --destructive-foreground: #FFFFFF;
+    --destructive-bg: #FEE9E7;
+    --danger: #FEE9E7;
+    --danger-foreground: #C00F0C;
+    --danger-button: #FCB3AD;
+
+    /* Success */
+    --success: #B7EB8F;
+    --success-foreground: #52C41A;
+
+    /* Subtle — used for reset filters text, placeholders */
+    --subtle: #848388;
+
+    /* Buttons */
+    --button-active: #1890FF;
+    --button-cancel: #D9D9D9;
+
     --border: oklch(0.922 0 0);
     --input: #F6F6F8;
     --ring: oklch(0.708 0 0);
@@ -91,11 +135,23 @@
     --primary-foreground: oklch(0.205 0 0);
     --secondary: oklch(0.269 0 0);
     --secondary-foreground: oklch(0.985 0 0);
+    --warning: oklch(0.269 0 0);
+    --warning-foreground: #FAAD14;
     --muted: oklch(0.269 0 0);
     --muted-foreground: oklch(0.708 0 0);
     --accent: oklch(0.269 0 0);
     --accent-foreground: oklch(0.985 0 0);
     --destructive: oklch(0.704 0.191 22.216);
+    --destructive-foreground: oklch(0.985 0 0);
+    --destructive-bg: oklch(0.269 0 0);
+    --danger: oklch(0.269 0 0);
+    --danger-foreground: oklch(0.704 0.191 22.216);
+    --danger-button: oklch(0.704 0.191 22.216);
+    --success: oklch(0.269 0 0);
+    --success-foreground: #52C41A;
+    --subtle: oklch(0.708 0 0);
+    --button-active: #1890FF;
+    --button-cancel: oklch(0.4 0 0);
     --border: oklch(1 0 0 / 10%);
     --input: oklch(1 0 0 / 15%);
     --ring: oklch(0.556 0 0);
@@ -115,11 +171,11 @@
 }
 
 @layer base {
-  * {
-    @apply border-border outline-ring/50;
+    * {
+        @apply border-border outline-ring/50;
     }
-  
-  html {
-    @apply font-roboto;
+
+    html {
+        @apply font-roboto;
     }
 }
