@@ -4,7 +4,7 @@ import { categories, categoryToParamsMap } from '@/constants';
 import { cn } from '@/lib/utils';
 import type { Category, Item, ItemParam } from '@/types';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { FormProvider, useForm } from 'react-hook-form';
+import { FormProvider, type Resolver, useForm } from 'react-hook-form';
 import { Link } from 'react-router';
 import * as z from 'zod';
 
@@ -15,9 +15,15 @@ import EditPageFormDescriptionField from './edit-page-form-description-field';
 const baseSchema = z.object({
     category: z.enum(categories),
     title: z.string().nonempty('Название должно быть заполнено'),
-    price: z.coerce
-        .number()
-        .min(0, 'Цена не может быть отрицательной') as z.ZodNumber,
+    price: z.preprocess(
+        (val) => {
+            const num = Number(val);
+            return val === '' || val === null || isNaN(num) ? undefined : num;
+        },
+        z
+            .number({ error: 'Цена должна быть заполнена' })
+            .positive('Цена должна быть положительной'),
+    ) as z.ZodType<number>,
     description: z
         .string()
         .max(1000, 'Описание не может быть длиннее 1000 символов')
@@ -57,12 +63,17 @@ export default function EditPageFormFields({ item, category }: Props) {
     const formSchema = buildFormSchema(category);
     const { params, ...itemFields } = item;
     const isSameCategory = category === item.category;
-    const form = useForm<z.infer<typeof formSchema>>({
-        resolver: zodResolver(formSchema),
+
+    type FormValues = Omit<z.infer<typeof formSchema>, 'price'> & {
+        price: number;
+    };
+
+    const form = useForm<FormValues>({
+        resolver: zodResolver(formSchema) as Resolver<FormValues>,
         defaultValues: {
             ...itemFields,
             ...(isSameCategory ? params : {}),
-            price: item.price ?? 0,
+            price: item.price !== null ? item.price : undefined,
             category,
         },
         mode: 'onBlur',
