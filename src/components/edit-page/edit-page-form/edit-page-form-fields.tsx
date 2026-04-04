@@ -1,87 +1,21 @@
 import { Button, buttonVariants } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
-import { categories, categoryToParamsMap } from '@/constants';
+import useEditAdForm from '@/hooks/use-edit-ad-form';
 import { cn } from '@/lib/utils';
-import type { Category, Item, ItemParam } from '@/types';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { FormProvider, type Resolver, useForm } from 'react-hook-form';
+import type { Category, Item } from '@/types';
+import { FormProvider } from 'react-hook-form';
 import { Link } from 'react-router';
-import * as z from 'zod';
 
 import EditPageFormBaseFields from './edit-page-form-base-fields';
 import EditPageFormCategoryParamsFields from './edit-page-form-category-params-fields';
 import EditPageFormDescriptionField from './edit-page-form-description-field';
-
-const baseSchema = z.object({
-    category: z.enum(categories),
-    title: z.string().nonempty('Название должно быть заполнено'),
-    price: z.preprocess(
-        (val) => {
-            const num = Number(val);
-            return val === '' || val === null || isNaN(num) ? undefined : num;
-        },
-        z
-            .number({ error: 'Цена должна быть заполнена' })
-            .positive('Цена должна быть положительной'),
-    ) as z.ZodType<number>,
-    description: z
-        .string()
-        .max(1000, 'Описание не может быть длиннее 1000 символов')
-        .optional(),
-});
-
-const numericParams = new Set<ItemParam>([
-    'yearOfManufacture',
-    'mileage',
-    'enginePower',
-    'area',
-    'floor',
-]);
-
-function buildFormSchema(category: Category) {
-    const categoryParams = categoryToParamsMap[category];
-    return baseSchema.extend(
-        Object.fromEntries(
-            categoryParams.map((param) => [
-                param,
-                numericParams.has(param)
-                    ? z.coerce.number().optional()
-                    : z.string().optional(),
-            ]),
-        ) as Record<
-            ItemParam,
-            z.ZodOptional<z.ZodString> | z.ZodOptional<z.ZodNumber>
-        >,
-    );
-}
 
 type Props = {
     item: Item;
     category: Category;
 };
 export default function EditPageFormFields({ item, category }: Props) {
-    const formSchema = buildFormSchema(category);
-    const { params, ...itemFields } = item;
-    const isSameCategory = category === item.category;
-
-    type FormValues = Omit<z.infer<typeof formSchema>, 'price'> & {
-        price: number;
-    };
-
-    const form = useForm<FormValues>({
-        resolver: zodResolver(formSchema) as Resolver<FormValues>,
-        defaultValues: {
-            ...itemFields,
-            ...(isSameCategory ? params : {}),
-            price: item.price !== null ? item.price : undefined,
-            category,
-        },
-        mode: 'onBlur',
-    });
-
-    function onSubmit(data: z.infer<typeof formSchema>) {
-        console.log(data);
-    }
+    const { form, onSubmit } = useEditAdForm({ category, item });
 
     return (
         <FormProvider {...form}>
@@ -99,7 +33,8 @@ export default function EditPageFormFields({ item, category }: Props) {
                         type="submit"
                         disabled={
                             !form.formState.isValid ||
-                            (!form.formState.isDirty && isSameCategory)
+                            (!form.formState.isDirty &&
+                                category === item.category)
                         }
                     >
                         Сохранить

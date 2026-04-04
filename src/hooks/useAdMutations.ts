@@ -3,24 +3,33 @@ import { getQueryClient } from '@/lib/query-client';
 import { adKeys } from '@/lib/query-keys';
 import type { UpdateAdInput } from '@/types';
 import { useMutation } from '@tanstack/react-query';
+import { useNavigate } from 'react-router';
+import { toast } from 'sonner';
 
-// import { toast } from 'sonner';
-
-export function useBotMutations() {
+export function useAdMutations() {
     const queryClient = getQueryClient();
-
-    const updateBotMutation = useMutation({
+    const navigate = useNavigate();
+    const updateAdMutation = useMutation({
         mutationFn: ({ id, data }: UpdateAdInput) =>
             adsApiClient.updateItem(id, data),
-        onSuccess: async (data, variables) => {
-            await queryClient.setQueryData(adKeys.detail(variables.id), data);
-            await queryClient.invalidateQueries({ queryKey: adKeys.lists() });
-            // toast.success('Объявление успешно обновлено!');
+        onSuccess: async (_, variables) => {
+            await Promise.all([
+                queryClient.invalidateQueries({ queryKey: adKeys.lists() }),
+                queryClient.invalidateQueries({
+                    queryKey: adKeys.detail(variables.id),
+                }),
+            ]);
+            toast.success('Изменения сохранены');
+            navigate(`/ads/${variables.id}`);
         },
-        //   onError: ({ message }) => toast.error(message),
+        onError: () =>
+            toast.error('Ошибка сохранения', {
+                description:
+                    'При попытке сохранить изменения произошла ошибка. Попробуйте ещё раз или зайдите позже.',
+            }),
     });
 
     return {
-        updateBot: updateBotMutation.mutate,
+        updateAd: updateAdMutation.mutate,
     };
 }

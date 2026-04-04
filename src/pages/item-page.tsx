@@ -5,8 +5,7 @@ import { Separator } from '@/components/ui/separator';
 import { useAd } from '@/hooks/useAds';
 import { useParams } from 'react-router';
 
-type Props = {};
-export default function ItemPage({}: Props) {
+export default function ItemPage() {
     const { id } = useParams<{ id: string }>();
     const { data, isLoading } = useAd({ id });
 

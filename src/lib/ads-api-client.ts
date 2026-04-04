@@ -1,4 +1,4 @@
-import type { Item, QueryParamsObject } from '@/types';
+import type { Item, QueryParamsObject, UpdateAdItem } from '@/types';
 
 import { getQueryParamsString } from './utils';
 
@@ -17,11 +17,14 @@ class AdsApiClient {
     }
     public async updateItem(
         id: string,
-        item: Item,
+        item: UpdateAdItem,
     ): Promise<{ success: boolean; error?: string }> {
         return (
             await fetch(`${API_URL}/items/${id}`, {
                 method: 'put',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
                 body: JSON.stringify(item),
             })
         ).json();

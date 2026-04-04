@@ -3,6 +3,7 @@ import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 
 import App from './App.tsx';
+import { Toaster } from './components/ui/sonner.tsx';
 import { getQueryClient } from './lib/query-client.ts';
 import './styles/global.css';
 
@@ -12,6 +13,7 @@ createRoot(document.getElementById('root')!).render(
     <StrictMode>
         <QueryClientProvider client={queryClient}>
             <App />
+            <Toaster />
         </QueryClientProvider>
     </StrictMode>,
 );

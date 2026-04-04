@@ -10,7 +10,7 @@ export function getQueryParamsString(params: QueryParamsObject) {
     return (
         '?' +
         Object.entries(params)
-            .filter(([_, value]) => !!value)
+            .filter(([, value]) => Boolean(value))
             .map(([param, value]) => `${param}=${value}`)
             .join('&')
     );
