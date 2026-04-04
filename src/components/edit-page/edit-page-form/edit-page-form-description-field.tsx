@@ -5,6 +5,7 @@ import {
     FieldLabel,
 } from '@/components/ui/field';
 import { Textarea } from '@/components/ui/textarea';
+import { cn } from '@/lib/utils';
 import { Controller, useFormContext } from 'react-hook-form';
 
 export default function EditPageFormDescriptionField() {
@@ -19,7 +20,7 @@ export default function EditPageFormDescriptionField() {
                     <FieldLabel htmlFor="edit-form-description">
                         Описание
                     </FieldLabel>
-                    <FieldContent>
+                    <FieldContent className="relative">
                         <Textarea
                             {...field}
                             id="edit-form-description"
@@ -29,6 +30,16 @@ export default function EditPageFormDescriptionField() {
                         {fieldState.invalid && (
                             <FieldError errors={[fieldState.error]} />
                         )}
+                        <span
+                            className={cn(
+                                'text-foreground/25 absolute right-0 bottom-0 translate-y-full text-sm',
+                                {
+                                    'text-red-500': field.value.length > 1000,
+                                },
+                            )}
+                        >
+                            {field.value.length}/1000
+                        </span>
                     </FieldContent>
                 </Field>
             )}
