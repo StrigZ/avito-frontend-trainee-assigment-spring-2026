@@ -206,7 +206,7 @@ fastify.post<GeneratePriceRequest>('/ai/price', async (request) => {
 
     const result = await aiApiClient.getMarketPrice(item)
 
-    return { price: result };
+    return result;
 });
 
 const port = 8080;

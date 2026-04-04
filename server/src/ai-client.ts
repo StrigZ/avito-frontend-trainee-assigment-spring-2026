@@ -3,7 +3,11 @@ import { Agent } from 'node:https';
 import { Item } from './types.ts';
 import { getGenerateDescriptionPrompt, getImproveDescriptionPrompt, getMarketPricePrompt } from './prompts.ts';
 
-
+export type MarketPriceResult = {
+    priceMin: number;
+    priceMax: number;
+    overview: string;
+};
 
 const httpsAgent = new Agent({ rejectUnauthorized: false });
 
@@ -42,9 +46,11 @@ class AIApiClient {
     }
 
    
-    public async getMarketPrice(item:Item): Promise<string> {
-         return this.getAnswer(getMarketPricePrompt(item));
-    }
+    public async getMarketPrice(item: Item): Promise<MarketPriceResult> {
+    const raw = await this.getAnswer(getMarketPricePrompt(item));  
+    const cleaned = raw.replace(/```json|```/g, '').trim();
+    return JSON.parse(cleaned) as MarketPriceResult;
+}
 }
 
 export const aiApiClient = await AIApiClient.create();
