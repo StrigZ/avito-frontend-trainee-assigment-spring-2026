@@ -57,8 +57,9 @@ export default function EditPageFormBaseFields() {
                                 <EditPageFormClearButton
                                     className="absolute top-1/2 right-2.5 -translate-y-1/2"
                                     onClear={() => {
-                                        form.setValue(field.name, '');
-                                        form.setFocus(field.name);
+                                        form.setValue(field.name, '', {
+                                            shouldValidate: true,
+                                        });
                                     }}
                                 />
                             </div>

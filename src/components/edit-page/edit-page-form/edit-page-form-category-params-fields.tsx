@@ -98,12 +98,15 @@ export default function EditPageFormCategoryParamsFields({ category }: Props) {
                                             />
                                             <EditPageFormClearButton
                                                 className="absolute top-1/2 right-2.5 -translate-y-1/2"
-                                                onClear={() =>
+                                                onClear={() => {
                                                     form.setValue(
                                                         field.name,
                                                         '',
-                                                    )
-                                                }
+                                                        {
+                                                            shouldDirty: true,
+                                                        },
+                                                    );
+                                                }}
                                             />
                                         </div>
                                     )}
