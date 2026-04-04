@@ -21,8 +21,17 @@ fastify.use((_, __, next) =>
 
 // Настройка CORS
 fastify.use((_, reply, next) => {
-  reply.setHeader('Access-Control-Allow-Origin', '*');
-  next();
+    reply.setHeader('Access-Control-Allow-Origin', '*');
+    reply.setHeader('Access-Control-Allow-Methods', 'GET, PUT, POST, DELETE, OPTIONS');
+    reply.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+
+    if (_.method === 'OPTIONS') {
+        reply.statusCode = 204;
+        reply.end();
+        return;
+    }
+
+    next();
 });
 
 interface ItemGetRequest extends Fastify.RequestGenericInterface {
@@ -99,7 +108,7 @@ fastify.get<ItemsGetRequest>('/items', request => {
           comparisonValue =
             new Date(item1.createdAt).valueOf() -
             new Date(item2.createdAt).valueOf();
-        } else if (sortColumn === 'price') {
+        } else if (sortColumn === 'price' && item1.price && item2.price) {
           comparisonValue = item1.price - item2.price
         }
 
