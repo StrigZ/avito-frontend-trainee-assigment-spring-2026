@@ -1,5 +1,6 @@
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router';
 
+import AdsLayoutProvider from './context/ads-layout-provider';
 import AdsQueryProvider from './context/ads-query-provider';
 import AdsPage from './pages/ads-page';
 import EditPage from './pages/edit-page';
@@ -13,7 +14,9 @@ function App() {
                     path="ads"
                     element={
                         <AdsQueryProvider>
-                            <AdsPage />
+                            <AdsLayoutProvider>
+                                <AdsPage />
+                            </AdsLayoutProvider>
                         </AdsQueryProvider>
                     }
                 />

@@ -1,17 +1,18 @@
 import { Button } from '@/components/ui/button';
+import { useAdsLayoutContext } from '@/context/ads-layout-provider';
 import { cn } from '@/lib/utils';
 import { LayoutGrid, List } from 'lucide-react';
 
-type Props = {
-    layout: 'grid' | 'list';
-};
-export default function ViewButtonGroup({ layout }: Props) {
+export default function ViewButtonGroup() {
+    const { layout, updateLayout } = useAdsLayoutContext();
+
     return (
         <div className="bg-input relative flex items-center rounded-lg">
             <Button
                 className={cn({ 'text-button-active': layout === 'grid' })}
                 variant={'link'}
                 size={'icon'}
+                onClick={() => updateLayout('grid')}
             >
                 <LayoutGrid />
             </Button>
@@ -22,6 +23,7 @@ export default function ViewButtonGroup({ layout }: Props) {
                 className={cn({ 'text-button-active': layout === 'list' })}
                 variant={'link'}
                 size={'icon'}
+                onClick={() => updateLayout('list')}
             >
                 <List />
             </Button>

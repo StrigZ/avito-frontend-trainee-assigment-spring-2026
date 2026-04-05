@@ -1,29 +1,56 @@
 import { categoryToDisplayTextMap } from '@/constants';
+import { cn } from '@/lib/utils';
 import type { Item } from '@/types';
 import { Image } from 'lucide-react';
 import { Link } from 'react-router';
 
+type Props = {
+    item: Omit<Item, 'params'>;
+    layout: 'grid' | 'list';
+};
 export default function AdsGridItem({
-    id,
-    title,
-    price,
-    category,
-    needsRevision,
-}: Omit<Item, 'params'>) {
+    item: { id, title, price, category, needsRevision },
+    layout,
+}: Props) {
     return (
         <li className="bg-card w-full cursor-pointer overflow-hidden rounded-2xl shadow-sm">
-            <Link to={String(id)} className="flex h-full flex-col">
+            <Link
+                to={String(id)}
+                className={cn('flex h-full', {
+                    'flex-row': layout === 'list',
+                    'flex-col': layout === 'grid',
+                })}
+            >
                 <div className="bg-muted flex aspect-4/3 items-center justify-center">
                     <Image size={72} />
                 </div>
-                <div className="relative flex h-full flex-col gap-1 p-4 pt-5.5">
-                    <p className="border-muted text-foreground bg-card absolute top-0 left-3 -translate-y-1/2 rounded-md border px-3 text-sm">
+                <div
+                    className={cn('relative flex h-full flex-col gap-1 p-4', {
+                        'pt-5.5': layout === 'grid',
+                        'pl-6': layout === 'list',
+                    })}
+                >
+                    <p
+                        className={cn('text-subtle rounded-md text-sm', {
+                            'border-muted bg-card absolute top-0 left-3 -translate-y-1/2 border px-3':
+                                layout === 'grid',
+                        })}
+                    >
                         {categoryToDisplayTextMap[category]}
                     </p>
-                    <h5 className="text-foreground truncate text-base">
+                    <h5
+                        className={cn('text-foreground text-base', {
+                            truncate: layout === 'grid',
+                        })}
+                    >
                         {title}
                     </h5>
-                    <p className="text-subtle mt-auto text-base leading-[1.4] font-semibold tracking-normal">
+                    <p
+                        className={cn(
+                            'text-subtle text-base leading-[1.4] font-semibold tracking-normal',
+                            { 'mt-auto': layout === 'grid' },
+                        )}
+                    >
                         {price} ₽
                     </p>
                     {needsRevision && (
