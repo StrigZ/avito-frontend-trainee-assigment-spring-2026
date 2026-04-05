@@ -9,7 +9,7 @@ export default function AdsPage() {
     const { total, isLoading } = useAdsQueryContext();
 
     return (
-        <main className="bg-background flex min-h-screen flex-col gap-4 overflow-hidden px-8 py-3">
+        <main className="bg-background container mx-auto flex min-h-screen flex-col gap-4 overflow-hidden px-8 py-3">
             <header className="sticky top-0 flex flex-col gap-4 pt-3">
                 <div className="flex items-center justify-between">
                     <div className="px-2">

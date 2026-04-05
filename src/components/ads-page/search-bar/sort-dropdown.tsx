@@ -72,7 +72,7 @@ export default function SortDropdown() {
             )}
             onValueChange={handleSortChange}
         >
-            <SelectTrigger className="bg-card border-input w-60 border-4">
+            <SelectTrigger className="bg-card border-input min-w-0 border-4 sm:w-60 sm:min-w-fit">
                 <SelectValue
                     placeholder={getDisplayText(
                         queryParams.sortColumn,

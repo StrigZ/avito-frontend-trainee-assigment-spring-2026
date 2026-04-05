@@ -20,17 +20,17 @@ export default function ItemPageHeader({
             <h2 className="text-foreground flex items-center justify-between text-xl font-medium md:text-3xl">
                 {title} <span>{price} ₽</span>
             </h2>
-            <div className="flex items-start justify-between">
+            <div className="flex flex-col items-start justify-between gap-6 sm:flex-row">
                 <Link
                     to={'edit'}
                     className={buttonVariants({
                         className:
-                            'bg-button-active! flex items-center gap-2 rounded-lg px-3 py-2 text-base font-normal text-white!',
+                            'bg-button-active! flex w-full items-center gap-2 rounded-lg px-3 py-2 text-base font-normal text-white! sm:w-fit',
                     })}
                 >
                     Редактировать <Edit />
                 </Link>
-                <div className="text-muted-foreground flex flex-col gap-1 text-right text-base leading-none font-normal">
+                <div className="text-muted-foreground flex flex-col gap-1 text-base leading-none font-normal sm:text-right">
                     <p>
                         Опубликовано:{' '}
                         {format(createdAt, 'd MMMM HH:mm', { locale: ru })}

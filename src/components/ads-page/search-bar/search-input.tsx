@@ -7,7 +7,7 @@ export default function SearchInput() {
     const handleSearchChange = (q: string) => updateQueryParam({ skip: 0, q });
 
     return (
-        <div className="relative flex-1">
+        <div className="relative sm:flex-1">
             <Input
                 placeholder="Найти объявление..."
                 className="bg-input placeholder:text-subtle rounded-lg border-none placeholder:text-sm"
