@@ -14,7 +14,7 @@ export default function ItemPage() {
     }
 
     return (
-        <main className="container mx-auto bg-white p-8">
+        <main className="container mx-auto min-h-screen p-8">
             <ItemPageHeader {...data} />
             <Separator className="my-8" />
             <ItemPageBody {...data} />

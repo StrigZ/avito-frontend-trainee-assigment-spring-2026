@@ -27,7 +27,7 @@ export default function Pagination() {
     return (
         <div className="flex items-center gap-2">
             <Button
-                className="text-foreground bg-white"
+                className="text-foreground bg-card"
                 onClick={handleGoBack}
                 disabled={queryParams.skip - queryParams.limit < 0}
             >
@@ -39,7 +39,7 @@ export default function Pagination() {
                     .map((_, i) => (
                         <Button
                             key={i}
-                            className={cn('text-foreground bg-white', {
+                            className={cn('text-foreground bg-card', {
                                 'border-button-active text-button-active border':
                                     i + 1 === currentPage,
                             })}
@@ -50,7 +50,7 @@ export default function Pagination() {
                     ))}
             </ul>
             <Button
-                className="text-foreground bg-white"
+                className="text-foreground bg-card"
                 onClick={handleGoNext}
                 disabled={queryParams.skip + queryParams.limit >= total}
             >

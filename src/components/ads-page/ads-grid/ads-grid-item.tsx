@@ -17,7 +17,7 @@ export default function AdsGridItem({
                     <Image size={72} />
                 </div>
                 <div className="relative flex h-full flex-col gap-1 p-4 pt-5.5">
-                    <p className="border-muted text-foreground absolute top-0 left-3 -translate-y-1/2 rounded-md border bg-white px-3 text-sm">
+                    <p className="border-muted text-foreground bg-card absolute top-0 left-3 -translate-y-1/2 rounded-md border px-3 text-sm">
                         {categoryToDisplayTextMap[category]}
                     </p>
                     <h5 className="text-foreground truncate text-base">
@@ -27,8 +27,8 @@ export default function AdsGridItem({
                         {price} ₽
                     </p>
                     {needsRevision && (
-                        <div className="bg-secondary text-secondary-foreground flex w-fit items-center gap-2 rounded-lg px-2 py-0.5 text-sm">
-                            <div className="bg-secondary-foreground h-1.5 w-1.5 rounded-full" />
+                        <div className="text-secondary-foreground bg-warning flex w-fit items-center gap-2 rounded-lg px-2 py-0.5 text-sm">
+                            <div className="bg-warning-foreground h-1.5 w-1.5 rounded-full" />
                             Требует доработок
                         </div>
                     )}

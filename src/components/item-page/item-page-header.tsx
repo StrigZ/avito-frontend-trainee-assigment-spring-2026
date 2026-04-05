@@ -25,7 +25,7 @@ export default function ItemPageHeader({
                     to={'edit'}
                     className={buttonVariants({
                         className:
-                            'bg-button-active! flex items-center gap-2 rounded-lg px-3 py-2 text-base font-normal',
+                            'bg-button-active! flex items-center gap-2 rounded-lg px-3 py-2 text-base font-normal text-white!',
                     })}
                 >
                     Редактировать <Edit />

@@ -56,7 +56,7 @@ export default function EditPageFormCategoryParamsFields({ category }: Props) {
                                         >
                                             <SelectTrigger
                                                 className={cn('w-full', {
-                                                    'border-secondary-foreground':
+                                                    'border-warning-foreground':
                                                         !field.value,
                                                 })}
                                                 id={`edit-form-${param}`}

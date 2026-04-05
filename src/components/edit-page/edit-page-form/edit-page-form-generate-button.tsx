@@ -103,7 +103,7 @@ export default function EditPageFormGenerateButton({
         <Popover open={isOpen} onOpenChange={setIsOpen}>
             <PopoverAnchor asChild>
                 <Button
-                    className="flex w-max items-center justify-center"
+                    className="text-warning-foreground bg-warning flex w-max items-center justify-center"
                     variant="secondary"
                     onClick={handleButtonClick}
                     type="button"
