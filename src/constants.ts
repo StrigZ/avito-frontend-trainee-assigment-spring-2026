@@ -25,7 +25,7 @@ export const electronicsParams = [
     'color',
 ] as const;
 
-export const paramToTextMap: Record<ItemParam, string> = {
+export const paramToTextMap: Record<ItemParam | 'description', string> = {
     address: 'Адрес',
     area: 'Площадь',
     brand: 'Бренд',
@@ -38,6 +38,7 @@ export const paramToTextMap: Record<ItemParam, string> = {
     transmission: 'Трансмиссия',
     type: 'Тип',
     yearOfManufacture: 'Год производства',
+    description: 'Описание',
 };
 
 export const categoryToParamsMap = {

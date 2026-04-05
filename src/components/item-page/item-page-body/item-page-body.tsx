@@ -16,9 +16,14 @@ export default function ItemPageBody({ description, params, category }: Item) {
         ItemParam,
         string | number,
     ][];
-    const missingParams = categoryParams.filter(
+    const missingParams: (ItemParam | 'description')[] = categoryParams.filter(
         (param) => !getParamValue(params, param as ItemParam),
     );
+
+    if (!description) {
+        missingParams.push('description');
+    }
+
     const assignedParams = paramsArray.filter(([, value]) => Boolean(value));
     console.log(missingParams);
     return (

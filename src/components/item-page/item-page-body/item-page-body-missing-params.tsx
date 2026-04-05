@@ -1,7 +1,7 @@
 import { paramToTextMap } from '@/constants';
 import type { ItemParam } from '@/types';
 
-type Props = { missingParams: ItemParam[] };
+type Props = { missingParams: (ItemParam | 'description')[] };
 export default function ItemPageBodyMissingParams({ missingParams }: Props) {
     return (
         <div className="bg-warning grid grid-cols-[min-content_1fr] gap-4 rounded-lg px-4 py-3 shadow">
