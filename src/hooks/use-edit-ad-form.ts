@@ -87,14 +87,24 @@ export default function useEditAdForm({
     }, []);
 
     useEffect(() => {
+        const current = localStorage.getItem(`edit-form-${item.id}`);
+        const parsed = current ? JSON.parse(current) : {};
+        localStorage.setItem(
+            `edit-form-${item.id}`,
+            JSON.stringify({ ...parsed, category }),
+        );
+    }, [category, item.id]);
+
+    useEffect(() => {
         const subscription = form.watch((values) => {
+            console.log(values);
             localStorage.setItem(
                 `edit-form-${item.id}`,
-                JSON.stringify(values),
+                JSON.stringify({ ...values, category }),
             );
         });
         return () => subscription.unsubscribe();
-    }, [form, item.id]);
+    }, [form, item.id, category]);
 
     const updateAdMutations = useAdMutations();
 
