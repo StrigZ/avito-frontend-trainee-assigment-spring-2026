@@ -10,8 +10,7 @@ export default function useAI() {
     const form = useFormContext();
 
     function buildItem(): Item {
-        const formFields = form.getValues();
-        console.log('formFields at call time:', formFields);
+        const formFields = form.getValues();       
         const { price, category, title, description } = formFields;
         const categoryParams = categoryToParamsMap[category as Category];
         const params = Object.fromEntries(
