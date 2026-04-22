@@ -1,6 +1,7 @@
 import 'dotenv/config'; 
 
 import Fastify from 'fastify';
+import cors from '@fastify/cors';
 import items from 'data/items.json' with { type: 'json' };
 import { Item } from 'src/types.ts';
 import { ItemsGetInQuerySchema, ItemUpdateInSchema } from 'src/validation.ts';
@@ -21,19 +22,9 @@ fastify.use((_, __, next) =>
   new Promise(res => setTimeout(res, 300 + Math.random() * 700)).then(next),
 );
 
-// Настройка CORS
-fastify.use((_, reply, next) => {
-    reply.setHeader('Access-Control-Allow-Origin', '*');
-    reply.setHeader('Access-Control-Allow-Methods', 'GET, PUT, POST, DELETE, OPTIONS');
-    reply.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-
-    if (_.method === 'OPTIONS') {
-        reply.statusCode = 204;
-        reply.end();
-        return;
-    }
-
-    next();
+await fastify.register(cors, {
+  origin: '*', // можно заменить на конкретный URL фронтенда для безопасности
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
 });
 
 interface ItemGetRequest extends Fastify.RequestGenericInterface {
