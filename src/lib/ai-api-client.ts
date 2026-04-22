@@ -1,6 +1,6 @@
 import type { Item } from '@/types';
 
-const API_URL = 'http://localhost:8080/ai';
+const API_URL = import.meta.env.VITE_AI_API_URL ?? 'http://localhost:8080/ai';
 export type MarketPriceResult = {
     priceMin: number;
     priceMax: number;
